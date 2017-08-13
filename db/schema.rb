@@ -10,13 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170803003426) do
+ActiveRecord::Schema.define(version: 20170813221713) do
 
-  create_table "collections", force: :cascade do |t|
-    t.string   "title"
-    t.string   "department"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
+  create_table "met_departments", force: :cascade do |t|
+    t.string   "department_name"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["department_name"], name: "index_met_departments_on_department_name", unique: true, using: :btree
   end
 
   create_table "met_objects", force: :cascade do |t|
@@ -66,6 +69,7 @@ ActiveRecord::Schema.define(version: 20170803003426) do
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
     t.string   "image_url"
+    t.integer  "met_department_id"
   end
 
 end

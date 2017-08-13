@@ -1,0 +1,2 @@
+class MetDepartment < ApplicationRecord
+end
